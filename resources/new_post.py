@@ -9,7 +9,7 @@ import datetime
 class NewPost(Resource):
     @jwt_required()
     def post(self):
-        args = validate_request(post_schema, request, partial=True)
+        args = validate_request(post_schema, request)
         author_id = get_jwt_identity()
         new_post = Posts(
             title=args["title"],

@@ -21,10 +21,10 @@ class PostSchema(Schema):
 
 
 class CommentSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Int()
     body = fields.Str(required=True)
-    post_id = fields.Int(dump_only=True)
-    user_id = fields.Int(dump_only=True)
+    post_id = fields.Int()
+    user_id = fields.Int()
 
 
 user_schema = UserSchema()
