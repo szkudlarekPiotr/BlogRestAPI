@@ -10,14 +10,14 @@ class UserSchema(Schema):
 
 
 class PostSchema(Schema):
-    id = fields.Int(dump_only=True)
+    id = fields.Int()
     title = fields.Str(required=True)
     subtitle = fields.Str(required=True)
-    date = fields.Str(required=True)
+    date = fields.Str()
     body = fields.Str(required=True)
-    author_name = fields.Str(dump_only=True)
+    author_name = fields.Str()
     img_url = fields.Str(required=True)
-    author_id = fields.Int(dump_only=True)
+    author_id = fields.Int()
 
 
 class CommentSchema(Schema):

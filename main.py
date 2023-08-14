@@ -6,6 +6,7 @@ import os
 from resources.home import HomePage
 from resources.register import Register
 from resources.login import Login
+from resources.new_post import NewPost
 
 SECRET_KEY = os.urandom(32)
 
@@ -19,6 +20,7 @@ api = Api(app)
 api.add_resource(HomePage, "/", "/home")
 api.add_resource(Register, "/register")
 api.add_resource(Login, "/login")
+api.add_resource(NewPost, "/new_post")
 
 if __name__ == "__main__":
     with app.app_context():
