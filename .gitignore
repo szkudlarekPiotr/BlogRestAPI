@@ -1,0 +1,6 @@
+# env variables #
+variables.env
+
+# pycache #
+common/__pycache__/
+resources/__pycache__/
