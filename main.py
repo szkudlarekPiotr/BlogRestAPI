@@ -8,6 +8,7 @@ from resources.register import Register
 from resources.login import Login
 from resources.new_post import NewPost
 from resources.post import PostInfo
+from resources.comment import AddComment
 
 SECRET_KEY = os.urandom(32)
 
@@ -23,6 +24,7 @@ api.add_resource(Register, "/register")
 api.add_resource(Login, "/login")
 api.add_resource(NewPost, "/new_post")
 api.add_resource(PostInfo, "/post/<int:post_id>")
+api.add_resource(AddComment, "/post/<int:post_id>/add_comment")
 
 if __name__ == "__main__":
     with app.app_context():

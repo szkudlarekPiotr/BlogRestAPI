@@ -10,7 +10,7 @@ class UserSchema(Schema):
 
 
 class PostSchema(Schema):
-    id = fields.Int()
+    id = fields.Int(dump_only=True)
     title = fields.Str(required=True)
     subtitle = fields.Str(required=True)
     date = fields.Str()
@@ -21,7 +21,7 @@ class PostSchema(Schema):
 
 
 class CommentSchema(Schema):
-    id = fields.Int()
+    id = fields.Int(dump_only=True)
     body = fields.Str(required=True)
     post_id = fields.Int()
     user_id = fields.Int()
