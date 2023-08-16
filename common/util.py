@@ -7,8 +7,8 @@ def commit():
     try:
         db.session.commit()
         return True
-    except SQLAlchemyError as e:
-        abort(500, message=f"Database commit error: {e.args}")
+    except SQLAlchemyError:
+        abort(500, message=f"Database commit error")
 
 
 def validate_request(schema, request, **kwargs):
