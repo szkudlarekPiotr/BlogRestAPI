@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_restful import abort
 
 
-def validate_commit():
+def commit():
     try:
         db.session.commit()
         return True

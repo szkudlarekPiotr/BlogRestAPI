@@ -1,7 +1,7 @@
 from flask_restful import Resource, abort, request
 from common.db_models import db, Users
 from common.db_schemas import user_schema
-from common.util import validate_commit, validate_request, existing_user
+from common.util import commit, validate_request, existing_user
 from werkzeug.security import generate_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token
 
@@ -17,7 +17,7 @@ class Register(Resource):
         if existing_user(args["email"]):
             abort(401, message="User already exists")
         db.session.add(new_user)
-        validate_commit()
+        commit()
         new_user = db.session.execute(
             db.select(Users).where(Users.email == args["email"])
         ).scalar()

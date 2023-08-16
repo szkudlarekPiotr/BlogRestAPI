@@ -10,7 +10,6 @@ class Posts(db.Model):
     subtitle = db.Column(db.String(250), nullable=False)
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    author_name = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     related = db.relationship("Users")

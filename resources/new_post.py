@@ -1,8 +1,8 @@
 from flask_restful import Resource, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from common.db_models import db, Posts, Users
-from common.db_schemas import post_schema, comment_schema
-from common.util import validate_commit, validate_request
+from common.db_schemas import post_schema
+from common.util import commit, validate_request
 import datetime
 
 
@@ -16,12 +16,9 @@ class NewPost(Resource):
             subtitle=args["subtitle"],
             date=datetime.date.today(),
             body=args["body"],
-            author_name=db.session.execute(
-                db.Select(Users.name).where(Users.id == author_id)
-            ).scalar(),
             img_url=args["img_url"],
             author_id=author_id,
         )
         db.session.add(new_post)
-        validate_commit()
+        commit()
         return {"post": post_schema.dump(new_post)}

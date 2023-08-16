@@ -2,7 +2,7 @@ from flask_restful import Resource, abort, request
 from common.db_models import db, Users, Posts, Comments
 from common.db_schemas import post_schema, comment_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from common.util import validate_commit, validate_request
+from common.util import commit, validate_request
 
 
 class PostInfo(Resource):
@@ -24,8 +24,8 @@ class PostInfo(Resource):
             abort(401, message="Only author can edit this post")
         for key in args.keys():
             setattr(post, key, args[key])
-        validate_commit()
-        return {"data": post_schema.dump(post)}
+        commit()
+        return {"post": post_schema.dump(post)}
 
     @jwt_required()
     def patch(self, post_id):
@@ -36,12 +36,15 @@ class PostInfo(Resource):
             abort(401, message="Only post author can edit this post")
         for key in args.keys():
             setattr(post, key, args[key])
-        validate_commit()
-        return {"data": post_schema.dump(post)}
+        commit()
+        return {"post": post_schema.dump(post)}
 
     @jwt_required()
     def delete(self, post_id):
         post = db.get_or_404(Posts, post_id)
+        user_id = get_jwt_identity()
+        if not user_id == post.author_id:
+            abort(401, message="Unauthorized")
         db.session.delete(post)
-        validate_commit()
+        commit()
         return {"message": "succesfully deleted post"}

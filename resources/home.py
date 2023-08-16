@@ -7,4 +7,4 @@ class HomePage(Resource):
     def get(self):
         posts = db.session.execute(db.select(Posts)).scalars()
         results = [post_schema.dump(item) for item in posts]
-        return {"data": results}
+        return {"posts": results}
